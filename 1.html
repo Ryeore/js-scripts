@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+	<script src="js.txt"></script>
+	<style>
+		#playerTable {
+			margin-top: 80px;
+			width: 1100px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		table {
+			border-collapse: collapse;
+			text-align: center;
+			width: 1100px;
+			margin-left: auto;
+			margin-right: auto;
+			background-color: white;
+		}
+		
+		table caption {
+			font-size: 30px;
+			margin-bottom: 10px;
+		}
+		
+		th, td {
+			border: 5px solid black;
+			padding: 10px 20px;
+			font-size: 20px;
+			
+		}
+		
+		#buttons {
+			float: right;
+			margin-top: 20px;
+		}
+		
+		#buttons button {
+			width: 200px;
+			font-size: 20px;
+			text-align: center;
+			margin: 5px;
+			display: block;
+		}
+		
+		#myLayout {
+			width: 1100px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 200px;
+		}
+		
+		.layoutDiv {
+			width: 75px;
+			height: 75px;
+			display: inline-block;
+			border: 2px solid black;
+			margin-left: 10px;
+			margin-right: 10px;
+			text-align: center;
+		}
+		
+		.layoutDiv p {
+			font-size: 30px;
+		}
+		
+		tr input {
+			width: 100px;
+		}
+		
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			padding-top: 100px;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgb(0,0,0);
+			background-color: rgba(0,0,0,0.4);
+		}
+		
+		.modal-content {
+			background-color: #fefefe;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+		}
+		
+		.close {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+		
+		.close:hover, .close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}	
+	</style>
+</head>
+<body onload="displayDate()">
+	<span id="date" style="float: right"></span>
+	<div id="playerTable">
+		<table id="tabela">
+			<caption>Add Students</caption>
+			<tr>
+				<th>No.</th>
+				<th>Name</th>
+				<th>Id</th>	
+				<th>Money</th>			<!-- pod tablką funkcja sumująca fee i value-->
+				<th>Value</th>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input class="input_player" type="text" placeholder="Name"></td>
+				<td><input class="input_player" type="text" placeholder="Id"></td>
+				<td><input class="input_player" type="text" placeholder="Money"></td>
+				<td><input class="input_player" type="text" placeholder="Value"></td>
+			</tr>
+		</table>
+		<div class="sums" style="text-align: right;">
+			<p style="display: inline-block">Total money:&nbsp <p id="totalFee" style="display: inline-block">0</p>
+			<p style="display: inline-block; margin-left: 50px">Total value:&nbsp <p id="totalValue" style="display: inline-block">0</p>
+		</div>
+		<div id="buttons">
+			<button onclick="addPlayer(document.getElementsByClassName('input_player'));
+							document.getElementById('totalFee').innerHTML = sumArray(document.getElementById('tabela'), 3);
+							document.getElementById('totalValue').innerHTML = sumArray(document.getElementById('tabela'), 4)">ADD</button>
+			<button onclick="removePlayer(prompt('Which row should be removed?'));
+							document.getElementById('totalFee').innerHTML = sumArray(document.getElementById('tabela'), 3);
+							document.getElementById('totalValue').innerHTML = sumArray(document.getElementById('tabela'), 4)">REMOVE</button>
+		
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<p id="modalSummary"></p>
+				</div>
+			</div>
+			<script>
+				var modal = document.getElementById("myModal");
+				var btn = document.getElementById("myBtn");
+				var span = document.getElementsByClassName("close")[0];
+				btn.onclick = function()
+				{
+					modal.style.display = "block";
+				}
+				span.onclick = function()
+				{
+					modal.style.display = "none";
+				}
+			</script>
+		
+		</div>
+	</div>
+</body>
+</html>
